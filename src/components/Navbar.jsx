@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
@@ -8,12 +8,32 @@ const Navbar = () => {
         </h1>
 
         <div className="nav-links">
-          <Link to="/host">Host</Link>
-          <Link to="/about">About</Link>
-          <Link to="/vans">Vans</Link>
+          <NavLink
+            to="/host"
+            className={({ isActive }) => {
+              return isActive ? "active-style" : null;
+            }}
+          >
+            Host
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => {
+              return isActive ? "active-style" : null;
+            }}
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/vans"
+            className={({ isActive }) => {
+              return isActive ? "active-style" : null;
+            }}
+          >
+            Vans
+          </NavLink>
         </div>
       </div>
-      <Outlet />
     </>
   );
 };
