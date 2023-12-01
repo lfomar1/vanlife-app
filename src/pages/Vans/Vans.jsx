@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import "../server";
+import "../../server";
+import { Link } from "react-router-dom";
 
 const Vans = () => {
   const [vans, setVans] = useState();
@@ -43,10 +44,12 @@ const Vans = () => {
           filteredVans.map((van) => {
             return (
               <div key={van.id}>
-                <img src={van.imageUrl} alt="van-img" className="vans-img" />
-                <h2>{van.name}</h2>
-                <p>${van.price}</p>
-                <p>{van.type}</p>
+                <Link to={`/vans/${van.id}`}>
+                  <img src={van.imageUrl} alt="van-img" className="vans-img" />
+                  <h2>{van.name}</h2>
+                  <p>${van.price}</p>
+                  <p>{van.type}</p>
+                </Link>
               </div>
             );
           })}

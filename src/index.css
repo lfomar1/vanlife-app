@@ -136,3 +136,16 @@ a {
   gap: 40px;
   justify-content: center;
 }
+.van-info {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: left;
+}
+.van-info > img {
+  text-align: center;
+  width: 400px;
+}
+.van-info-price {
+  display: flex;
+  align-items: center;
+}
