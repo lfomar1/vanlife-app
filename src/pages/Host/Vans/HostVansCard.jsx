@@ -1,12 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-const HostVansDetails = () => {
+const HostVansCard = () => {
   const params = useParams();
 
   const linkStyle = {
     display: "flex",
     alignItems: "center",
-    textDecoration: "underline",
   };
   const [hostVanDetail, setHostVanDetail] = useState([]);
   useEffect(() => {
@@ -16,9 +15,9 @@ const HostVansDetails = () => {
   });
   return (
     <>
-      <Link to="/host/vans" style={linkStyle}>
+      <Link to=".." relative="path" style={linkStyle}>
         <span className="material-symbols-outlined">arrow_back</span>{" "}
-        <p className="nav-links"> To all vans </p>
+        <p className="back-to-vans"> To all vans </p>
       </Link>
       <div className="vans-detail-list">
         {hostVanDetail.map((van) => {
@@ -46,7 +45,8 @@ const HostVansDetails = () => {
           );
         })}
       </div>
+      <Outlet />
     </>
   );
 };
-export default HostVansDetails;
+export default HostVansCard;

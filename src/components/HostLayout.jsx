@@ -4,7 +4,7 @@ const HostLayout = () => {
     <>
       <div className="nav-links">
         <NavLink
-          to="/host"
+          to="."
           end
           className={({ isActive }) => {
             return isActive ? "active-style" : null;

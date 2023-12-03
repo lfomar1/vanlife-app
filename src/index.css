@@ -45,6 +45,9 @@ a {
   gap: 20px;
   font-weight: 600;
 }
+.nav-links > a:hover {
+  text-decoration: underline;
+}
 .app {
   display: flex;
   flex-direction: column;
@@ -170,4 +173,7 @@ a {
 }
 .vans-host-list > img {
   width: 100px;
+}
+.back-to-vans:hover {
+  text-decoration: underline;
 }
