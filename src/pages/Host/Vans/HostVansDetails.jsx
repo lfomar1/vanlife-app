@@ -6,7 +6,7 @@ const HostVansDetails = () => {
   const params = useParams();
   const detailStyling = {
     display: "flex",
-    alignItems: "center",
+    flexDirection: "column",
     gap: "10px",
   };
   useEffect(() => {
@@ -19,20 +19,26 @@ const HostVansDetails = () => {
       {details
         ? details.map((van) => {
             return (
-              <div key={van.id}>
-                <div style={detailStyling}>
+              <div key={van.id} style={detailStyling}>
+                <div
+                  style={{ display: "flex", gap: "5px", alignItems: "center" }}
+                >
                   <h3>Name: </h3>
                   <p>{van.name}</p>
                 </div>
-                <div style={detailStyling}>
+                <div
+                  style={{ display: "flex", gap: "5px", alignItems: "center" }}
+                >
                   <h3>Category: </h3>
                   <p>{van.type}</p>
                 </div>
-                <div style={detailStyling}>
+                <div style={{ display: "flex", gap: "5px" }}>
                   <h3>Description: </h3>
                   <p>{van.description}</p>
                 </div>
-                <div style={detailStyling}>
+                <div
+                  style={{ display: "flex", gap: "5px", alignItems: "center" }}
+                >
                   <h3>Visibilty: </h3>
                   <p>Public</p>
                 </div>

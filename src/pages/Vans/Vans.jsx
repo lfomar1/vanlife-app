@@ -1,50 +1,68 @@
-import { useEffect, useState } from "react";
 import "../../server";
-import { Link } from "react-router-dom";
-
+import { getVans } from "../../api";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+export const loader = () => {
+  return getVans();
+};
 const Vans = () => {
-  const [vans, setVans] = useState();
-  const [selectedFilter, setSelectedFilter] = useState();
+  const vans = useLoaderData();
 
-  useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
-  }, []);
-  const chooseFilter = (type) => {
-    setSelectedFilter(type);
-  };
-  const clearFilter = () => {
-    setSelectedFilter(null);
-  };
-  const filteredVans = vans
-    ? selectedFilter
-      ? vans.filter((van) => van.type === selectedFilter)
-      : vans
-    : [];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get("type");
+
+  const displayedVans = typeFilter
+    ? vans.filter((van) => van.type === typeFilter)
+    : vans;
+
   return (
     <div className="vans">
       <div className="vans-explore">
         <h1>Explore our vans options</h1>
-        <button className="simple-btn" onClick={() => chooseFilter("simple")}>
+        <button
+          onClick={() => setSearchParams({ type: "simple" })}
+          className={`van-type simple ${
+            typeFilter === "simple" ? "selected" : ""
+          }`}
+        >
           Simple
         </button>
-        <button className="luxury-btn" onClick={() => chooseFilter("luxury")}>
+        <button
+          onClick={() => setSearchParams({ type: "luxury" })}
+          className={`van-type luxury ${
+            typeFilter === "luxury" ? "selected" : ""
+          }`}
+        >
           Luxury
         </button>
-        <button className="rugged-btn" onClick={() => chooseFilter("rugged")}>
+        <button
+          onClick={() => setSearchParams({ type: "rugged" })}
+          className={`van-type rugged ${
+            typeFilter === "rugged" ? "selected" : ""
+          }`}
+        >
           Rugged
         </button>
-        <button className="clear-filters" onClick={() => clearFilter()}>
-          Clear Filters
-        </button>
+        {typeFilter ? (
+          <button
+            onClick={() => setSearchParams({})}
+            className={`van-type clear-filter`}
+          >
+            Clear Filters
+          </button>
+        ) : null}
       </div>
       <div className="vans-category">
-        {vans &&
-          filteredVans.map((van) => {
+        {displayedVans &&
+          displayedVans.map((van) => {
             return (
               <div key={van.id}>
-                <Link to={`/vans/${van.id}`}>
+                <Link
+                  to={van.id}
+                  state={{
+                    search: `?${searchParams.toString()}`,
+                    type: typeFilter,
+                  }}
+                >
                   <img src={van.imageUrl} alt="van-img" className="vans-img" />
                   <h2>{van.name}</h2>
                   <p>${van.price}</p>
