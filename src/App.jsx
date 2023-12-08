@@ -15,6 +15,7 @@ import HostVansDetails from "./pages/Host/Vans/HostVansDetails";
 import Dashboard from "./pages/Host/Dashboard";
 import Error404 from "./pages/Error404";
 import Error from "./components/Error";
+import Login from "./pages/Login";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -28,6 +29,7 @@ function App() {
       <Route path="/" element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
         <Route path="vans" loader={vansLoader} element={<Vans />}></Route>
         <Route path="vans/:id" element={<VanDetail />}></Route>
         <Route path="host" element={<HostLayout />}>

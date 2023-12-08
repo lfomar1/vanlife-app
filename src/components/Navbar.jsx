@@ -32,6 +32,14 @@ const Navbar = () => {
           >
             Vans
           </NavLink>
+          <NavLink
+            to="/login"
+            className={({ isActive }) => {
+              return isActive ? "active-style" : null;
+            }}
+          >
+            <span className="material-symbols-outlined">login</span>
+          </NavLink>
         </div>
       </div>
     </>

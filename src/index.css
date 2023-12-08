@@ -254,3 +254,32 @@ a {
   margin: 0 auto;
   margin-bottom: 20px;
 }
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px;
+}
+.login > h1 {
+  display: flex;
+  justify-content: center;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login-form > input {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  margin: 0 auto;
+  cursor: pointer;
+}
