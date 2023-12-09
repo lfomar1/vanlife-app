@@ -1,30 +1,22 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
+import { useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../../api";
+export const loader = ({ params }) => {
+  return getHostVans(params.id);
+};
 const HostVansDetailsPhotos = () => {
-  const [photo, setPhoto] = useState([]);
-  const params = useParams();
-
-  useEffect(() => {
-    fetch(`/api/host/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setPhoto(data.vans));
-  }, [params.id]);
+  const photo = useLoaderData();
+  console.log(photo);
   return (
     <>
-      {photo
-        ? photo.map((van) => {
-            return (
-              <div key={van.id}>
-                <img
-                  src={van.imageUrl}
-                  alt="van-picture"
-                  style={{ width: "100px", borderRadius: "10px" }}
-                />
-              </div>
-            );
-          })
-        : null}
+      {
+        <div key={photo.id}>
+          <img
+            src={photo.imageUrl}
+            alt="van-picture"
+            style={{ width: "100px", borderRadius: "10px" }}
+          />
+        </div>
+      }
     </>
   );
 };

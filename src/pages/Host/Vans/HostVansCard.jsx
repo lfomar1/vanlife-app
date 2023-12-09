@@ -1,18 +1,21 @@
-import { NavLink, Link, useParams, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLoaderData, Link, NavLink, Outlet } from "react-router-dom";
+import { getHostVans } from "../../../api";
+export const loader = ({ params }) => {
+  return getHostVans(params.id);
+};
 const HostVansCard = () => {
-  const params = useParams();
-
   const linkStyle = {
     display: "flex",
     alignItems: "center",
   };
-  const [hostVanDetail, setHostVanDetail] = useState([]);
-  useEffect(() => {
-    fetch(`/api/host/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setHostVanDetail(data.vans));
-  });
+  const hostVanDetail = useLoaderData();
+  // const [hostVanDetail, setHostVanDetail] = useState([]);
+  // const params = useParams();
+  // useEffect(() => {
+  //   fetch(`/api/host/vans/${params.id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setHostVanDetail(data.vans));
+  // }, [params.id]);
   return (
     <>
       <Link to=".." relative="path" style={linkStyle}>
@@ -21,30 +24,28 @@ const HostVansCard = () => {
       </Link>
       <div className="vans-detail-list">
         <div>
-          {hostVanDetail.map((van) => {
-            return (
-              <header
-                key={van.id}
-                style={{
-                  display: "flex",
-                  justifyContent: "left",
-                  alignItems: "center",
-                  gap: "20px",
-                }}
-              >
-                <img
-                  src={van.imageUrl}
-                  alt="van-image"
-                  style={{ width: "200px", borderRadius: "10px" }}
-                />
-                <div>
-                  <p>{van.type}</p>
-                  <h2>{van.name}</h2>
-                  <p>${van.price}/day</p>
-                </div>
-              </header>
-            );
-          })}
+          {
+            <header
+              key={hostVanDetail.id}
+              style={{
+                display: "flex",
+                justifyContent: "left",
+                alignItems: "center",
+                gap: "20px",
+              }}
+            >
+              <img
+                src={hostVanDetail.imageUrl}
+                alt="van-image"
+                style={{ width: "200px", borderRadius: "10px" }}
+              />
+              <div>
+                <p>{hostVanDetail.type}</p>
+                <h2>{hostVanDetail.name}</h2>
+                <p>${hostVanDetail.price}/day</p>
+              </div>
+            </header>
+          }
         </div>
         <nav className="host-van-detail-nav">
           <NavLink
