@@ -43,14 +43,12 @@ function App() {
           loader={vansDetailLoader}
         ></Route>
         <Route path="host" element={<HostLayout />}>
-          <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
           <Route
             index
             element={<Dashboard />}
-            loader={async () => {
-              return await requireAuth();
-            }}
+            loader={async () => await requireAuth()}
           />
+          <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
           <Route
             path="income"
             element={<Income />}
