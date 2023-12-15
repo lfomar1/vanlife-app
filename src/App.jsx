@@ -27,6 +27,8 @@ import { loader as hostVansLoader } from "./pages/Host/HostVans";
 import { loader as hostVansLoaderCard } from "./pages/Host/Vans/HostVansCard";
 import { loader as hostVansLoaderPhoto } from "./pages/Host/Vans/HostVansPhotos";
 import { loader as hostVansLoaderDetail } from "./pages/Host/Vans/HostVansDetails";
+import { loader as hostVansLoaderPrice } from "./pages/Host/Vans/HostVansPricing";
+import { requireAuth } from "./utils";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -46,23 +48,15 @@ function App() {
             index
             element={<Dashboard />}
             loader={async () => {
-              return null;
+              return await requireAuth();
             }}
           />
           <Route
             path="income"
             element={<Income />}
-            loader={async () => {
-              return null;
-            }}
+            loader={hostVansLoaderPrice}
           />
-          <Route
-            path="reviews"
-            element={<Reviews />}
-            loader={async () => {
-              return null;
-            }}
-          />
+          <Route path="reviews" element={<Reviews />} />
           <Route
             path="vans/:id"
             element={<HostVansCard />}
@@ -76,9 +70,7 @@ function App() {
             <Route
               path="pricing"
               element={<HostVansPricing />}
-              loader={async () => {
-                return null;
-              }}
+              loader={hostVansLoaderPrice}
             />
             <Route
               path="photos"

@@ -1,31 +1,18 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../../api";
 
+export const loader = ({ params }) => {
+  return getHostVans(params.id);
+};
 const HostVansDetailsPricing = () => {
-  const [price, setPrice] = useState([]);
-  const params = useParams();
-
-  useEffect(() => {
-    fetch(`/api/host/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setPrice(data.vans));
-  }, [params.id]);
+  const van = useLoaderData();
 
   return (
     <>
-      {price
-        ? price.map((van) => {
-            return (
-              <div
-                key={van.id}
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <p style={{ fontWeight: "bold" }}>${van.price}</p>
-                <p>/day</p>
-              </div>
-            );
-          })
-        : null}
+      <div key={van.id} style={{ display: "flex", alignItems: "center" }}>
+        <p style={{ fontWeight: "bold" }}>${van.price}</p>
+        <p>/day</p>
+      </div>
     </>
   );
 };

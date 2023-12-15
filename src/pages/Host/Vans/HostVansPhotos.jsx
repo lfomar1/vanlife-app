@@ -5,7 +5,7 @@ export const loader = ({ params }) => {
 };
 const HostVansDetailsPhotos = () => {
   const photo = useLoaderData();
-  console.log(photo);
+
   return (
     <>
       {

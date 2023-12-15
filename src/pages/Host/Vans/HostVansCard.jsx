@@ -9,13 +9,7 @@ const HostVansCard = () => {
     alignItems: "center",
   };
   const hostVanDetail = useLoaderData();
-  // const [hostVanDetail, setHostVanDetail] = useState([]);
-  // const params = useParams();
-  // useEffect(() => {
-  //   fetch(`/api/host/vans/${params.id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setHostVanDetail(data.vans));
-  // }, [params.id]);
+
   return (
     <>
       <Link to=".." relative="path" style={linkStyle}>

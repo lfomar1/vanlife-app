@@ -1,6 +1,7 @@
 import "../../server";
 import { getVans } from "../../api";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+
 export const loader = () => {
   return getVans();
 };
